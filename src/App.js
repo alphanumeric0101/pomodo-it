@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import Top from './components/appbar.js';
 
 export default class App extends Component {
   render() {
     return (
-      <h1>Hello, world.</h1>
+    	<div>
+    	<Top />
+    	<h1>Hello, Pidg!</h1>
+    	</div>
     );
   }
 }
