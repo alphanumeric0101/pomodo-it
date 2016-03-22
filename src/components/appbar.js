@@ -5,10 +5,7 @@ import Settings from 'material-ui/lib/svg-icons/action/settings';
 import FlatButton from 'material-ui/lib/flat-button';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import IconMenu from 'material-ui/lib/menus/icon-menu';
-import NavigationClose from 'material-ui/lib/navigation-close';
-
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
+import LeftNavSimpleExample from './leftnav.js';
 
 function handleTouchTap() {
   alert('onTouchTap triggered on the title component');
@@ -24,7 +21,9 @@ const Top = () => (
   <AppBar
     title={<span style={styles.title}>Pomodo-It</span>}
     onTitleTouchTap={handleTouchTap}
-    iconElementLeft={<IconButton><NavigationClose /></IconButton>}
+    iconElementLeft={
+      <LeftNavSimpleExample />
+    }
     iconElementRight={
       <IconMenu
         iconButtonElement={

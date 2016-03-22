@@ -13,9 +13,7 @@ const style = {
 
 const Clock = () => (
     <Paper style={style} zDepth={1} circle={true}>
-    	<p>12</p>
     	<TimePicker hintText="Set Start" />
-    	<TimePickerExampleSimple />
     </Paper>
 );
 
