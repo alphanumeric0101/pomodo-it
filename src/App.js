@@ -1,9 +1,6 @@
 import Top from './components/appbar.js';
 import Task from './components/task.js';
 import React, { Component } from 'react';
-// import injectTapEventPlugin from 'react-tap-event-plugin';
-
-// injectTapEventPlugin();
 
 export default class App extends Component {
   render() {
