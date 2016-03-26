@@ -4,7 +4,9 @@
   "description": "Boilerplate for ReactJS project with hot code reloading",
   "scripts": {
     "start": "node server.js",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress --colors"
+
   },
   "repository": {
     "type": "git",

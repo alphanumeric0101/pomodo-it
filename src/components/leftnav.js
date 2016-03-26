@@ -6,8 +6,7 @@ import IconButton from 'material-ui/lib/icon-button';
 import Menu from 'material-ui/lib/svg-icons/navigation/menu';
 import Colors from 'material-ui/lib/styles/colors';
 
-
-export default class LeftNavSimpleExample extends React.Component {
+export default class Nav extends React.Component {
 
   constructor(props) {
     super(props);

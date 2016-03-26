@@ -24,7 +24,7 @@ import Colors from 'material-ui/lib/styles/colors';
 
 const Styles = {
   listStyle: {
-    width: '60%',
+    width: '60vw',
     float: 'left',
     marginTop: '2%'
     },

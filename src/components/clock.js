@@ -1,16 +1,10 @@
 import React from 'react';
 import Paper from 'material-ui/lib/paper';
-import TimePickerExampleSimple from './timeSet.js';
-import TimePicker from 'material-ui/lib/time-picker/time-picker';
 import CircularProgress from 'material-ui/lib/circular-progress';
-
 import Colors from 'material-ui/lib/styles/colors'; 
-
 import IconButton from 'material-ui/lib/icon-button';
 import PlayCircle from 'material-ui/lib/svg-icons/av/play-circle-outline';
 import Pause from 'material-ui/lib/svg-icons/av/pause-circle-outline';
-
-
 
 export default class Clock extends React.Component {
 
@@ -69,7 +63,7 @@ export default class Clock extends React.Component {
 	  maxWidth: 150,
 	  textAlign: 'center',
 	  marginTop: 25,
-	  marginRight: '5%',
+	  marginRight: '8vw',
 	  marginBottom: 15,
 	  float: 'right',
 	  position: 'relative'
@@ -105,7 +99,7 @@ export default class Clock extends React.Component {
     			<IconButton iconStyle={iconStyles} onClick={this.startProgress}>
     				<PlayCircle color={Colors.green400} />
     			</IconButton>
-       			<IconButton iconStyle={iconStyles} onClick={this.pauseProgress}>
+       		<IconButton iconStyle={iconStyles} onClick={this.pauseProgress}>
     				<Pause color={Colors.amber900} />
     			</IconButton>
     		</div>
