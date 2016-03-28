@@ -25,7 +25,7 @@ const styles = {
 
 const Top = () => (
   <AppBar
-    title={<span style={styles.title}>Pomodoin-It</span>}
+    title={<span style={styles.title}>Pomodo-It</span>}
     onTitleTouchTap={handleTouchTap}
     iconElementLeft={
       <Nav />
