@@ -1,19 +1,31 @@
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+var express = require('express'),
+	React = require('react'),  
+    db = require('./model/db'),
+    bodyParser = require('body-parser');
+    http = require('http'),
+    path = require('path');
 
-new WebpackDevServer(webpack(config), {
-  publicPath: config.output.publicPath,
-  hot: true,
-  historyApiFallback: true,
-  watchOptions: {
-    aggregateTimeout: 300,
-    poll: 300
-  },
-}).listen(3000, 'localhost', function (err, result) {
-  if (err) {
-    return console.log(err);
-  }
+var app = express();
 
-  console.log('Listening at http://localhost:3000/');
+app.set('port', process.env.PORT || 3000);
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, './')));
+
+app.get('/', function(req, res) {
+  res.render('index');
 });
+
+app.get('/tasks/all', db.readAllTasks);
+app.post('/tasks/createTask', db.createTask);
+
+// app.get('/', .index);
+// app.get('/users', user.list);
+
+http.createServer(app).listen(app.get('port'), function(){
+  console.log("Express server listening on port " + app.get('port'));
+});
+
+
+

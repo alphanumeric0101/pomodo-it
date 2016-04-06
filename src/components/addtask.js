@@ -6,26 +6,46 @@ import FlatButton from 'material-ui/lib/flat-button';
 import SelectField from 'material-ui/lib/select-field';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import TextField from 'material-ui/lib/text-field';
+import List from 'material-ui/lib/lists/list';
+import ListItem from 'material-ui/lib/lists/list-item';
+import CloseButton from 'material-ui/lib/svg-icons/navigation/close';
 import Colors from 'material-ui/lib/styles/colors';
+
+import request from 'superagent';
 
 export default class addTask extends React.Component {
 
   	constructor(props) {
 	  	  super(props);
 	  	  this.state = {
-	  	  	open: true,
+	  	  	open: false,
 	  	  	titleValue: null,
-	  	  	subtasks: [{title: 'git init'},{title: 'git clone'}],
-	  	  	durationValue: null,
-	  	  };
+	  	  	subValue: '',
+	  	  	subTasks: [],
+	  	  	durationValue: 25,
+	  	  }
 	  	}
-	
+
   	handleOpen = () => this.setState({open: true});
   	handleSave = () => this.setState({open: false});
-  	handleClose = () => this.setState({open: false});
-  	handleDurationChange = (event, index, value) => this.setState({durationValue});
+  	handleClose = () => this.setState({open: false, titleValue: '', subValue: '', durationValue: 25, subTasks: [] });
+  	handleDurationChange = (event, index, value) => this.setState({durationValue: value});
   	handleTitleChange = (event) => this.setState({titleValue: event.target.value});
-  	handleSave = () => {this.setState({open: false}); alert('task saved')};
+  	handleSubChange = (event) => this.setState({subValue: event.target.value});
+
+  	deleteSubTask = (event) => {
+  		var t = this.state.subTasks
+	  	t.pop(event.target.key)
+	  	this.setState({subTasks: t})
+	};
+ 
+	saveSubTask = (event) => {
+		if (event.target.value) {
+		  	var t = this.state.subTasks
+		  	t.push(this.state.subValue)
+		  	this.setState({subTasks: t, subValue: ''})
+	    }
+	};
 
 	render() {
 		const actions = [
@@ -39,59 +59,83 @@ export default class addTask extends React.Component {
       		  label="Ok"
       		  primary={true}
       		  keyboardFocused={true}
-      		  onClick={this.handleSave}
+      		  onTouchTap={this.props.saveTask.bind(this, this.state.titleValue, this.state.subTasks, this.state.durationValue) }
       		/>
     ];
 		const styles = {
 			position: 'fixed',
 			right: '5',
 			bottom: '5',
-			zIndex: 2000
+			zIndex: 2
 		}
 
 		let SubTasks =
-			<div>
-        	    {this.state.subtasks.map(function(data, i) {
-        	        return (<TextField hintText={data.title} key={i} />)
-        	    })}
-        	</div>
+        	    this.state.subTasks.map((data, i) => {
+        	        return (
+        	        	<ListItem 
+        	        		primaryText={data} 
+        	        		rightIcon={<CloseButton onClick={this.deleteSubTask} />}
+        	        		key={i}
+        	        		id={i}
+        	      //   		onFocus={this.handleSubChange}
+        	      //   		onChange={this.handleSubChange}
+	          				// onBlur={this.saveSubTask}
+	          				// onEnterKeyDown={this.saveSubTask}
+        	        	/>
+        	        )
+        	    });
 
 	return (
 		<div>
-		<AddButton 
-	        secondary={true}
-	        style={styles}
-	        onClick={this.handleOpen}
-	    >
-	      <Add />
-	    </AddButton>
+			<AddButton 
+		        secondary={true}
+		        style={styles}
+		        onClick={this.handleOpen}
+		    >
+		      <Add />
+		    </AddButton>
 
-	    <Dialog
-          title="Create New Task"
-          actions={actions}
-          modal={false}
-          open={this.state.open}
-          onRequestClose={this.handleClose}
-        >
+		    <Dialog
+	          title="Create New Task"
+	          actions={actions}
+	          modal={false}
+	          open={this.state.open}
+	          onRequestClose={this.handleClose}
+	        >
 
-	        <TextField
-	          hintText="Task Title"
-	          onChange={this.handleTitleChange}
-	        />
+		        <TextField
+		          floatingLabelText="Title"
+		          hintText="Set Title"
+		          onChange={this.handleTitleChange}
+		        />
 
-	        {SubTasks}
+		        <TextField
+		          floatingLabelText="Add Sub Task"
+		          hintText="Add Sub Task"
+		          value={this.state.subValue}
+		          onFocus={this.handleSubChange}
+		          onChange={this.handleSubChange}
+		          onBlur={this.saveSubTask}
+		          onEnterKeyDown={this.saveSubTask}
+		        />
 
+		        <List>
+		        	{SubTasks}
+		        </List>
 
-	        <SelectField value={this.state.durationValue} onChange={this.handleDurationChange} floatingLabelText="Duration">
-	          <MenuItem value={1} primaryText="25min"/>
-	          <MenuItem value={2} primaryText="50min"/>
-	          <MenuItem value={3} primaryText="1hr 45min"/>
-	          <MenuItem value={4} primaryText="4hrs"/>
-	          <MenuItem value={5} primaryText="8hrs"/>
-	        </SelectField>
+		        <SelectField value={this.state.durationValue} onChange={this.handleDurationChange} floatingLabelText="Duration">
+		          <MenuItem value={25} primaryText="25min"/>
+		          <MenuItem value={50} primaryText="50min"/>
+		          <MenuItem value={105} primaryText="1hr 45min"/>
+		          <MenuItem value={240} primaryText="4hrs"/>
+		          <MenuItem value={480} primaryText="8hrs"/>
+		        </SelectField>
 
-
-        </Dialog>
-        </div>		
+		    </Dialog>
+	    </div>		
     )}
 }
+
+addTask.propTypes = {
+	saveTask: React.PropTypes.func
+};

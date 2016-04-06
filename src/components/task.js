@@ -22,72 +22,58 @@ import Clock from './clock.js';
 
 import Colors from 'material-ui/lib/styles/colors';
 
-const Styles = {
-  listStyle: {
-    width: '60vw',
-    float: 'left',
-    marginTop: '2%'
-    },
-  cardStyle: {
-    },
-  }
+export default class TaskList extends React.Component {
 
-const Task = () => (
-  <div>
-  <Card style={Styles.cardStyle}>
-      <CardHeader><CardTop taskTitle={'Setup Environment'}/></CardHeader>
-      <CardText>
-        <List style={Styles.listStyle}>
-         <ListItem
-            primaryText="Clone Repo"
-            style={Styles.listItemStyle}
-            leftCheckbox={<Checkbox />}
-          />
-          <Divider inset={false} />
-          <ListItem
-            primaryText="npm install"
-            style={Styles.listItemStyle}  
-            leftCheckbox={<Checkbox />}
-          >
-          </ListItem>
-          <Divider inset={false} />
-          <ListItem
-            primaryText="Run npm start and navigate to localhost"
-            style={Styles.listItemStyle}
-            leftCheckbox={<Checkbox />}
-          />
-        </List>
-        <Clock taskTime={25}/>
-      </CardText>
-  </Card>
+    constructor(props) {
+        super(props);
+        this.state = {tasks: props.data}
+    }
 
-  <Card style={Styles.cardStyle}>
-      <CardHeader><CardTop taskTitle={'Build App Bar'}/></CardHeader>
-      <CardText>
-        <List style={Styles.listStyle}>
-         <ListItem
-            primaryText="Choose Color"
-            style={Styles.listItemStyle}
-            leftCheckbox={<Checkbox />}
-          />
-          <Divider inset={false} />
-          <ListItem
-            primaryText="Configure LeftNav component"
-            style={Styles.listItemStyle}  
-            leftCheckbox={<Checkbox />}
-          >
-          </ListItem>
-          <Divider inset={false} />
-          <ListItem
-            primaryText="Define available settings options"
-            style={Styles.listItemStyle}
-            leftCheckbox={<Checkbox />}
-          />
-        </List>
-        <Clock taskTime={25}/>
-      </CardText>
-  </Card>
-  </div>
-);
+    render() {
 
-export default Task;
+      const Styles = {
+        listStyle: {
+          width: '60vw',
+          float: 'left',
+          marginTop: '2%'
+        }
+      }
+
+      let taskList = this.props.data
+
+      const Task =
+        
+        taskList.map((task, i) => {
+
+          let subs =
+
+            task.subTasks.map((sub, i) => {
+              return (
+                <ListItem
+                  primaryText={sub}
+                  leftCheckbox={<Checkbox/>}
+                  key={i}
+                />
+              )
+            })
+
+          return (
+              <Card style={Styles.cardStyle} key={i}>
+                <CardHeader><CardTop taskTitle={task.title}/></CardHeader>
+                <CardText>
+                  <List style={Styles.listStyle}>
+                    {subs}
+                  </List>
+                  <Clock taskTime={task.duration}/>
+                </CardText>
+              </Card>
+            )
+        })
+
+      return (
+        <div>
+        {Task}
+        </div>
+      )
+    }
+}

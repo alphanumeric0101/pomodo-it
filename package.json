@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "Boilerplate for ReactJS project with hot code reloading",
   "scripts": {
-    "start": "node server.js",
+    "start": "node devServer.js",
     "lint": "eslint src",
     "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress --colors"
-
   },
   "repository": {
     "type": "git",
@@ -45,7 +44,12 @@
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "mongodb": "^2.1.11",
+    "mongoose": "^4.4.10",
     "react": "^0.14.6",
-    "react-dom": "^0.14.6"
+    "react-dom": "^0.14.6",
+    "superagent": "^1.8.3"
   }
 }
