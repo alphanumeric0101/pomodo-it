@@ -35,7 +35,6 @@ export default class App extends Component {
   }
 
   saveTask = (t, s, d) => {
-  	console.log(t + s + d)
   	  const postData = {
   			title: t,
 			subTasks: s,

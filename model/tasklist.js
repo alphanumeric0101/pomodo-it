@@ -9,4 +9,4 @@ exports.tasklist = function tasklist(gname, callback) {
       callback("", tasks);
     }
   }); // end Task.find 
-}; // end exports.Tasklist
+}; // end export of Tasklist
