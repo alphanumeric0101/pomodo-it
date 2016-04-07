@@ -1,15 +1,16 @@
 {
-  "name": "react-hot-boilerplate",
+  "name": "Pomodo-It",
   "version": "1.0.0",
-  "description": "Boilerplate for ReactJS project with hot code reloading",
+  "description": "Basic task management app based on the Pomodoro technique",
   "scripts": {
-    "start": "node devServer.js",
+  	"start": "node server.js",
+    "startDev": "node devServer.js",
     "lint": "eslint src",
     "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress --colors"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gaearon/react-hot-boilerplate.git"
+    "url": "https://github.com/alphanumeric0101/pomodo-it"
   },
   "keywords": [
     "react",
@@ -22,12 +23,12 @@
     "edit",
     "webpack"
   ],
-  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
+  "author": "Enzo Matrix<alphanumeric@openmailbox.org> (http://github.com/alphanumeric0101)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gaearon/react-hot-boilerplate/issues"
+    "url": "https://github.com/alphanumeric0101/pomodo-it/issues"
   },
-  "homepage": "https://github.com/gaearon/react-hot-boilerplate",
+  "homepage": "https://github.com/alphanumeric0101/pomodo-it",
   "devDependencies": {
     "babel-core": "^6.0.20",
     "babel-eslint": "^4.1.3",
