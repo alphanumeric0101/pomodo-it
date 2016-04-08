@@ -47,11 +47,19 @@ export default class App extends Component {
 	this.getData();
   }
 
+  deleteTask = (taskId) => {
+  	  request
+  	  		.post('/tasks/deleteTask')
+  	  		.send(taskId)
+  	  		.end();
+  	this.getData();
+  }
+
   render() {
     return (
     	<div>
     		<Top />
-      		<TaskList data={this.state.tasks} />
+      		<TaskList data={this.state.tasks} delete={this.deleteTask} ref='taskList' />
       		<AddTask saveTask={this.saveTask} ref='addTask' />
     	</div>
     );

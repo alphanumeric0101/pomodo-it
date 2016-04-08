@@ -19,7 +19,8 @@ app.get('/', function(req, res) {
 
 app.get('/tasks/all', db.readAllTasks);
 app.post('/tasks/createTask', db.createTask);
-
+app.delete('tasks/deleteTask', db.deleteTask);
+app.put('tasks/editTask', db.editTask);
 // app.get('/', .index);
 // app.get('/users', user.list);
 

@@ -18,10 +18,11 @@ db.once('open', function(){
   console.log('Connected to mongoDB');
 });
 
+var allTasks = db.collection('tasks');
+
 function readAllTasks(req, res) {
-  var tasksCollection = db.collection('tasks');
   var holster = []
-  tasksCollection.find({}).forEach(function(doc){
+  allTasks.find({}).forEach(function(doc){
     holster.push(doc);    
  	}, function(){
  		res.send(holster);
@@ -39,5 +40,13 @@ function createTask(req, res) {
 		if (err) return handleError(err);
 	})
 };
-
 exports.createTask = createTask;
+
+function deleteTask(req, res) {
+  console.log(req);
+  allTasks.findOneAndRemove({
+    _id: req.id
+  }, function(err, removed){
+    if (err) return handleError(err);
+  })
+}
