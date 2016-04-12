@@ -1,5 +1,5 @@
 import Top from './components/appbar.js';
-import TaskList from './components/task.js';
+import TaskList from './components/taskList.js';
 import AddTask from './components/addtask.js';
 import React, { Component } from 'react';
 import request from 'superagent';
@@ -29,7 +29,7 @@ export default class App extends Component {
         }
         else {
           self.setState({tasks: res.body});
-          self.refs.addTask.handleClose();
+          self.refs.addTask.handleCancel();
         }
       });
   }
@@ -47,19 +47,46 @@ export default class App extends Component {
 	this.getData();
   }
 
+  updateTask = (taskId, t, s, d) => {
+  	  const postData = {
+  	  	    title: t,
+		    subTasks: s,
+		    duration: d
+		}
+	  request
+	  		.put('/tasks/updateTask/' + taskId)
+	  		.send(postData)
+	  		.end();
+	this.getData();
+  }
+
   deleteTask = (taskId) => {
   	  request
-  	  		.post('/tasks/deleteTask')
-  	  		.send(taskId)
+  	  		.del('/tasks/deleteTask/' + taskId)
   	  		.end();
   	this.getData();
   }
 
   render() {
+
+  	const dummyData = [
+          {
+            title: 'git clone',
+            _id: 111,
+            subTasks: ['npm install', 'npm start'],
+            duration: 25
+          }, {
+            title: 'Set Styles',
+            _id: 222,
+            subTasks: ['chose colors', 'import fonts'],
+            duration: 25
+          }
+        ]
+  
     return (
     	<div>
     		<Top />
-      		<TaskList data={this.state.tasks} delete={this.deleteTask} ref='taskList' />
+      		<TaskList data={this.state.tasks} devData={dummyData} updateTask={this.updateTask} deleteTask={this.deleteTask} ref='taskList' />
       		<AddTask saveTask={this.saveTask} ref='addTask' />
     	</div>
     );

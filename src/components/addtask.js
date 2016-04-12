@@ -22,13 +22,13 @@ export default class addTask extends React.Component {
 	  	  	titleValue: null,
 	  	  	subValue: '',
 	  	  	subTasks: [],
-	  	  	durationValue: 25,
+	  	  	durationValue: 25
 	  	  }
 	  	}
 
   	handleOpen = () => this.setState({open: true});
   	handleSave = () => this.setState({open: false});
-  	handleClose = () => this.setState({open: false, titleValue: '', subValue: '', durationValue: 25, subTasks: [] });
+  	handleCancel = () => this.setState({open: false, titleValue: '', subValue: '', durationValue: 25, subTasks: [] });
   	handleDurationChange = (event, index, value) => this.setState({durationValue: value});
   	handleTitleChange = (event) => this.setState({titleValue: event.target.value});
   	handleSubChange = (event) => this.setState({subValue: event.target.value});
@@ -53,7 +53,7 @@ export default class addTask extends React.Component {
       		  label="Cancel"
       		  secondary={true}
       		  keyboardFocused={true}
-      		  onClick={this.handleClose}
+      		  onClick={this.handleCancel}
       		/>,
       		<FlatButton
       		  label="Ok"
@@ -63,10 +63,12 @@ export default class addTask extends React.Component {
       		/>
     ];
 		const styles = {
-			position: 'fixed',
-			right: '5',
-			bottom: '5',
-			zIndex: 2
+			AddButtonStyles : {
+				position: 'fixed',
+				right: '5',
+				bottom: '5',
+				zIndex: 101
+			}
 		}
 
 		let SubTasks =
@@ -77,10 +79,6 @@ export default class addTask extends React.Component {
         	        		rightIcon={<CloseButton onClick={this.deleteSubTask} />}
         	        		key={i}
         	        		id={i}
-        	      //   		onFocus={this.handleSubChange}
-        	      //   		onChange={this.handleSubChange}
-	          				// onBlur={this.saveSubTask}
-	          				// onEnterKeyDown={this.saveSubTask}
         	        	/>
         	        )
         	    });
@@ -89,7 +87,7 @@ export default class addTask extends React.Component {
 		<div>
 			<AddButton 
 		        secondary={true}
-		        style={styles}
+		        style={styles.AddButtonStyles}
 		        onClick={this.handleOpen}
 		    >
 		      <Add />
@@ -100,7 +98,7 @@ export default class addTask extends React.Component {
 	          actions={actions}
 	          modal={false}
 	          open={this.state.open}
-	          onRequestClose={this.handleClose}
+	          onRequestClose={this.handleCancel}
 	        >
 
 		        <TextField

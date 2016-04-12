@@ -11,10 +11,6 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 import IconMenu from 'material-ui/lib/menus/icon-menu';
 import Nav from './leftnav.js';
 
-function handleTouchTap() {
-  alert('onTouchTap triggered on the title component');
-}
-
 const styles = {
   title: {
     cursor: 'pointer',
@@ -26,7 +22,6 @@ const styles = {
 const Top = () => (
   <AppBar
     title={<span style={styles.title}>Pomodo-It</span>}
-    onTitleTouchTap={handleTouchTap}
     iconElementLeft={
       <Nav />
     }

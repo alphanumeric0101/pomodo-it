@@ -69,14 +69,19 @@ export default class Clock extends React.Component {
 	  position: 'relative'
 	};
 
-	const iconStyles = {
-	    height: 50,
-	    width: 50
+	const rootStyles = {
+    padding: 0,
+    width: 48,
+    height: 48
 	};
 
+  const iconStyle = {
+    width: 52,
+    height: 52
+  }
+
+
 	const controlStyles = {
-		maxWidth: '100%',
-		margin: -13
 	};
 
 	const timeStyle = {
@@ -94,15 +99,14 @@ export default class Clock extends React.Component {
     	<Paper style={style} zDepth={2} circle={false}>
     		<CircularProgress mode="determinate" value={this.state.completed} size={2} />    		
     		<span style={timeStyle}>{this.state.taskTime}</span>
-
-    		<div style={controlStyles}>
-    			<IconButton iconStyle={iconStyles} onClick={this.startProgress}>
+    			
+          <IconButton style={rootStyles} iconStyle={iconStyle} onClick={this.startProgress}>
     				<PlayCircle color={Colors.green400} />
     			</IconButton>
-       		<IconButton iconStyle={iconStyles} onClick={this.pauseProgress}>
+
+       		<IconButton style={rootStyles} iconStyle={iconStyle} onClick={this.pauseProgress}>
     				<Pause color={Colors.amber900} />
     			</IconButton>
-    		</div>
     	</Paper>
     );
   }

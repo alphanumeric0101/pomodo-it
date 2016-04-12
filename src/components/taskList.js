@@ -17,7 +17,7 @@ import ListItem from 'material-ui/lib/lists/list-item';
 import Divider from 'material-ui/lib/divider';
 import Checkbox from 'material-ui/lib/checkbox';
 
-import CardTop from './taskTop.js';
+import CardTop from './CardTop.js';
 import Clock from './clock.js';
 
 import Colors from 'material-ui/lib/styles/colors';
@@ -29,11 +29,14 @@ export default class TaskList extends React.Component {
         this.state = {tasks: props.data}
     }
 
+    updateTask = (taskId, t, s, d) => {this.props.updateTask(taskId, t, s, d)};
+    deleteTask = (taskId) => {this.props.deleteTask(taskId)};
+
     render() {
 
       const Styles = {
         listStyle: {
-          width: '60vw',
+          maxWidth: '60vw',
           float: 'left',
           marginTop: '2%'
         }
@@ -41,7 +44,7 @@ export default class TaskList extends React.Component {
 
       let taskList = this.props.data
 
-      const Task =
+      const Tasks =
         
         taskList.map((task, i) => {
 
@@ -59,7 +62,7 @@ export default class TaskList extends React.Component {
 
           return (
               <Card style={Styles.cardStyle} key={i}>
-                <CardHeader><CardTop taskTitle={task.title}/></CardHeader>
+                <CardHeader><CardTop taskObj={task} deleteTask={this.deleteTask}/></CardHeader>
                 <CardText>
                   <List style={Styles.listStyle}>
                     {subs}
@@ -72,7 +75,7 @@ export default class TaskList extends React.Component {
 
       return (
         <div>
-        {Task}
+        {Tasks}
         </div>
       )
     }

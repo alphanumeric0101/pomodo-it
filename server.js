@@ -19,14 +19,13 @@ app.get('/', function(req, res) {
 
 app.get('/tasks/all', db.readAllTasks);
 app.post('/tasks/createTask', db.createTask);
-app.delete('tasks/deleteTask', db.deleteTask);
-app.put('tasks/editTask', db.editTask);
+app.delete('/tasks/deleteTask/:id', db.deleteTask);
+
+//app.put('/tasks/updateTask/:id', db.updateTask);
+
 // app.get('/', .index);
 // app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
-
-
-

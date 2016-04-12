@@ -26,7 +26,7 @@ function readAllTasks(req, res) {
     holster.push(doc);    
  	}, function(){
  		res.send(holster);
- 	})
+ 	});
 }
 exports.readAllTasks = readAllTasks;
 
@@ -37,16 +37,25 @@ function createTask(req, res) {
 		subTasks: req.body.subTasks,
 		duration: req.body.duration
 	}, function(err, newTask){
-		if (err) return handleError(err);
-	})
-};
+		if (err) return console.log(err);
+	});
+}
 exports.createTask = createTask;
 
 function deleteTask(req, res) {
-  console.log(req);
-  allTasks.findOneAndRemove({
-    _id: req.id
-  }, function(err, removed){
-    if (err) return handleError(err);
-  })
+  Task.findByIdAndRemove(req.params.id, 
+    function(err, removed){
+      if (err) return console.log(err);
+      res.status(200).send('Task Deleted');
+  });
 }
+exports.deleteTask = deleteTask;
+
+function updateTask(req, res) {
+  Task.findByIdAndUpdate(req.params.id, req.body,
+    function(err, updated){
+      if (err) return console.log(err);
+      res.status(200).send('Task Updated')
+    });
+}
+exports.updateTask = updateTask;
