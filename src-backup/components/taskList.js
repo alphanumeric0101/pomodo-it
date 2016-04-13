@@ -18,8 +18,7 @@ import Divider from 'material-ui/lib/divider';
 import Checkbox from 'material-ui/lib/checkbox';
 
 import CardTop from './CardTop.js';
-import Clock from './Clock.js';
-import EditWindow from './EditTask.js'
+import Clock from './clock.js';
 
 import Colors from 'material-ui/lib/styles/colors';
 
@@ -27,14 +26,11 @@ export default class TaskList extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {tasks: props.data, editMode: false, selectedTask: null, editKey: 1}
+        this.state = {tasks: props.data}
     }
 
     updateTask = (taskId, t, s, d) => {this.props.updateTask(taskId, t, s, d)};
     deleteTask = (taskId) => {this.props.deleteTask(taskId)};
-    openEdit = (task) => {
-      this.refs.editDialog.handleOpening(task);
-      }
 
     render() {
 
@@ -46,7 +42,7 @@ export default class TaskList extends React.Component {
         }
       }
 
-      let taskList = this.props.data
+      let taskList = this.props.devData
 
       const Tasks =
         
@@ -66,7 +62,7 @@ export default class TaskList extends React.Component {
 
           return (
               <Card style={Styles.cardStyle} key={i}>
-                <CardHeader><CardTop taskObj={task} deleteTask={this.deleteTask} openEdit={this.openEdit}/></CardHeader>
+                <CardHeader><CardTop taskObj={task} deleteTask={this.deleteTask}/></CardHeader>
                 <CardText>
                   <List style={Styles.listStyle}>
                     {subs}
@@ -80,7 +76,6 @@ export default class TaskList extends React.Component {
       return (
         <div>
         {Tasks}
-        <EditWindow ref="editDialog" updateTask={this.updateTask}/>
         </div>
       )
     }

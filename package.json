@@ -6,7 +6,8 @@
   	"start": "node server.js",
     "startDev": "node devServer.js",
     "lint": "eslint src",
-    "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress --colors"
+    "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress --colors",
+    "dev": "NODE_ENV=development webpack-dev-server --config ./webpack.config.js --progress --colors"
   },
   "repository": {
     "type": "git",

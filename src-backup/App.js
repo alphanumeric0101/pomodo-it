@@ -4,6 +4,7 @@ import AddTask from './components/addtask.js';
 import React, { Component } from 'react';
 import request from 'superagent';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+
 injectTapEventPlugin();
 
 export default class App extends Component {
@@ -34,8 +35,8 @@ export default class App extends Component {
   }
 
   saveTask = (t, s, d) => {
-  	const postData = {
-  		title: t,
+  	  const postData = {
+  			title: t,
 			subTasks: s,
 			duration: d
   		}
@@ -49,11 +50,11 @@ export default class App extends Component {
   updateTask = (taskId, t, s, d) => {
   	  const postData = {
   	  	    title: t,
-		        subTasks: s,
-		        duration: d
+		    subTasks: s,
+		    duration: d
 		}
 	  request
-	  		.put('/tasks/updateTask/' + taskId)
+	  		.post('/tasks/updateTask/' + taskId)
 	  		.send(postData)
 	  		.end();
 	this.getData();
@@ -85,9 +86,9 @@ export default class App extends Component {
     return (
     	<div>
     		<Top />
-      	<TaskList data={this.state.tasks} devData={dummyData} updateTask={this.updateTask} deleteTask={this.deleteTask} ref='taskList' />
-      	<AddTask saveTask={this.saveTask} ref='addTask' />
-      </div>
+      		<TaskList data={this.state.tasks} devData={dummyData} updateTask={this.updateTask} deleteTask={this.deleteTask} ref='taskList' />
+      		<AddTask saveTask={this.saveTask} ref='addTask' />
+    	</div>
     );
   }
 }

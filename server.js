@@ -20,7 +20,7 @@ app.get('/', function(req, res) {
 app.get('/tasks/all', db.readAllTasks);
 app.post('/tasks/createTask', db.createTask);
 app.delete('/tasks/deleteTask/:id', db.deleteTask);
-
+app.put('/tasks/updateTask/:id', db.updateTask);
 //app.put('/tasks/updateTask/:id', db.updateTask);
 
 // app.get('/', .index);

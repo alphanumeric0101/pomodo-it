@@ -38,7 +38,7 @@ export default class CardTop extends React.Component {
             targetOrigin={{horizontal: 'right', vertical: 'top'}}
             anchorOrigin={{horizontal: 'right', vertical: 'top'}}
           >
-            <MenuItem primaryText="Edit" onTouchTap={this.props.openEdit.bind(this, this.props.taskObj)}/>
+            <MenuItem primaryText="Edit" onTouchTap={this.props.updateTask.bing(this, this.props.taskObj._id) }/>
             <MenuItem primaryText="Add to routine" />
             <MenuItem primaryText="Discard" onTouchTap={this.props.deleteTask.bind(this, this.props.taskObj._id) }/>
           </IconMenu>
@@ -50,7 +50,6 @@ export default class CardTop extends React.Component {
 
 CardTop.propTypes = {
   taskObj: React.PropTypes.object,
-  openEdit: React.PropTypes.func,
   del: React.PropTypes.func,
   taskId: React.PropTypes.string
 };
