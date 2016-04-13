@@ -52,13 +52,13 @@ export default class addTask extends React.Component {
       		<FlatButton
       		  label="Cancel"
       		  secondary={true}
-      		  keyboardFocused={true}
+      		  keyboardFocused={false}
       		  onClick={this.handleCancel}
       		/>,
       		<FlatButton
       		  label="Ok"
       		  primary={true}
-      		  keyboardFocused={true}
+      		  keyboardFocused={false}
       		  onTouchTap={this.props.saveTask.bind(this, this.state.titleValue, this.state.subTasks, this.state.durationValue) }
       		/>
     ];

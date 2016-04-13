@@ -58,7 +58,7 @@ export default class EditTask extends React.Component {
       <FlatButton
         label="Cancel"
         secondary={true}
-        keyboardFocused={true}
+        keyboardFocused={false}
         onClick={this.handleCancel}
       />,
       <FlatButton
