@@ -1,13 +1,13 @@
 {
   "name": "Pomodo-It",
   "version": "1.0.0",
-  "description": "Basic task management app based on the Pomodoro technique",
+  "description": "Basic task management app based on the Pomodoro technique with an Electron build",
+  "main": "main.js",
   "scripts": {
-  	"start": "node server.js",
+    "start": "node server.js",
     "startDev": "node devServer.js",
     "lint": "eslint src",
-    "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress --colors",
-    "dev": "NODE_ENV=development webpack-dev-server --config ./webpack.config.js --progress --colors"
+    "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress --colors"
   },
   "repository": {
     "type": "git",
@@ -47,6 +47,7 @@
   },
   "dependencies": {
     "body-parser": "^1.15.0",
+    "electron": "^0.4.1",
     "express": "^4.13.4",
     "mongodb": "^2.1.11",
     "mongoose": "^4.4.10",
